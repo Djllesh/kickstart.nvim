@@ -89,7 +89,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
+vim.g.nofsync = true
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -194,6 +194,16 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move with centered position' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move with centered position' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next with centered position' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous with centered postition' })
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Copy without losing the buffer' })
+
+vim.keymap.set('n', 'o', 'o<Esc>0"_D', { desc = 'Create the line under, no insert mode' })
+vim.keymap.set('n', 'O', 'O<Esc>0"_D', { desc = 'Create the line above, no insert mode' })
+
+vim.keymap.set('n', '<leader>we', '<C-w>w', { desc = 'Go to opposite tab' })
 -- NOTE: Some terminals have coliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
@@ -237,6 +247,7 @@ vim.opt.rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
+
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -296,7 +307,7 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.opt.timeoutlen
-      delay = 0,
+      delay = 1000,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
@@ -546,8 +557,6 @@ require('lazy').setup({
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -706,7 +715,7 @@ require('lazy').setup({
       --
       -- You can press `g?` for help in this menu.
       --
-      -- `mason` had to be setup earlier: to configure its options see the
+      -- `znfba` unq gb or frghc rneyvre: gb pbasvther vgf bcgvbaf frr gur
       -- `dependencies` table for `nvim-lspconfig` above.
       --
       -- You can add other tools here that you want Mason to install
@@ -957,6 +966,9 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('nvim-treesitter.install').compilers = { 'zig' }
+    end,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
