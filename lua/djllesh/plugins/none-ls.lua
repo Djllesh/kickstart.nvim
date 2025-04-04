@@ -1,7 +1,4 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
+---@diagnostic disable: undefined-global
 return {
   'nvimtools/none-ls.nvim',
   dependencies = {
@@ -10,17 +7,16 @@ return {
   },
   config = function()
     local null_ls = require 'null-ls'
-    local formatting = null_ls.builtins.formatting -- to setup formatters
+    local formatting = null_ls.builtins.formatting   -- to setup formatters
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
     -- list of formatters & linters for mason to install
     require('mason-null-ls').setup {
       ensure_installed = {
-        'prettier', -- ts/js formatter
         'stylua', -- lua formatter
-        'eslint_d', -- ts/js linter
         'shfmt',
         'ruff',
+        'clang-format',
       },
       -- auto-install configured formatters & linters (with null-ls)
       automatic_installation = true,
@@ -31,6 +27,7 @@ return {
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
+      formatting.clang_format.with { args = { '-style={BasedOnStyle: mozilla, IndentWidth: 4}' } },
       require('none-ls.formatting.ruff').with { extra_args = { '--extend-select', 'I' } },
       require 'none-ls.formatting.ruff_format',
     }
@@ -47,7 +44,7 @@ return {
             group = augroup,
             buffer = bufnr,
             callback = function()
-              vim.lsp.buf.format { async = false }
+              vim.lsp.buf.format { async = true }
             end,
           })
         end
