@@ -1,5 +1,6 @@
 require 'djllesh.settings'
 require 'djllesh.keymaps'
+require 'djllesh.terminal'
 require 'djllesh.lazy'
 
 -- let python docstrings be comments instead of screaming-loud-multiline-strings
