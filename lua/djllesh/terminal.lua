@@ -51,7 +51,7 @@ local function open_float_term(opts)
   return { buf = buf, win = win }
 end
 
-vim.keymap.set('n', '<leader>ft', function()
+vim.keymap.set('n', '<leader>lg', function()
   if not vim.api.nvim_win_is_valid(float_state.win) then
     float_state = open_float_term { buf = float_state.buf }
     if vim.bo[float_state.buf].buftype ~= 'terminal' then
