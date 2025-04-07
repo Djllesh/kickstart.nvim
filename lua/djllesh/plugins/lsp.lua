@@ -23,7 +23,7 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
@@ -74,24 +74,28 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', require('snacks').picker.lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gr', require('snacks').picker.lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gI', require('snacks').picker.lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
 
           -- Fuzzy find all the symbols in your current document. Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>ds', function()
+            require('snacks').picker.lsp_symbols()
+          end, '[D]ocument [S]ymbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>ws', function()
+            require('snacks').picker.lsp_workspace_symbols()
+          end, '[W]orkspace [S]ymbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -101,24 +105,24 @@ return {
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
+          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          --  For example, in C this would take you to the header.
+          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
           -- Jump to the next diagnostic error
           vim.keymap.set('n', '<leader>gn', function()
             vim.diagnostic.jump { count = 1, float = true }
-          end)
+          end, { desc = '[G]o to the [N]ext diagnostic error' })
 
           -- Jump to the previous diagnostic error
           vim.keymap.set('n', '<leader>gp', function()
             vim.diagnostic.jump { count = -1, float = true }
-          end)
+          end, { desc = '[G]o to the [P]revious diagnostic error' })
 
           -- Jump to the previous diagnostic error
           vim.keymap.set('n', '<leader>of', function()
             vim.diagnostic.open_float()
           end, { desc = 'Open floating window' })
-
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -129,6 +133,7 @@ return {
             if vim.fn.has 'nvim-0.11' == 1 then
               return client:supports_method(method, bufnr)
             else
+              ---@diagnostic disable-next-line: param-type-mismatch
               return client.supports_method(method, { bufnr = bufnr })
             end
           end
@@ -226,7 +231,6 @@ return {
           filetypes = { '.cpp', '.h' },
           init_options = {
             fallbackFlags = { '-std=c++23' },
-            -- tab = { 4 },
           },
         },
 
@@ -239,24 +243,13 @@ return {
                 autopep8 = { enabled = false },
                 yapf = { enabled = false },
                 mccabe = { enabled = false },
-                pylsp_mypy = { enabled = false },
+                pylsp_mypy = { enabled = true },
                 pylsp_black = { enabled = false },
                 pylsp_isort = { enabled = false },
               },
             },
           },
         },
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
 
         lua_ls = {
           -- cmd = { ... },
@@ -271,6 +264,10 @@ return {
               -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
+        },
+
+        ltex = {
+          filetypes = { 'tex' },
         },
       }
 

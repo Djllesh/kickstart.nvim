@@ -51,16 +51,16 @@ vim.keymap.set('n', 'O', 'O<Esc>0"_D', { desc = 'Create the line above, no inser
 -- Navigation within windows
 vim.keymap.set('n', '<leader>we', '<C-w>w', { desc = 'Go to opposite window' })
 vim.keymap.set('n', '<leader>wv', '<C-w>v', { desc = 'Split the window vertically' })
-vim.keymap.set('n', '<leader>wh', '<C-w>s', { desc = 'Split the window horizontally' })
+vim.keymap.set('n', '<leader>wu', '<C-w>s', { desc = 'Split the window horizontally' })
 vim.keymap.set('n', '<leader>wq', '<C-w>q', { desc = 'Close the current window' })
 vim.keymap.set('n', '<leader>wx', '<C-w>x', { desc = 'Exchange current window with next one' })
 
 -- Resizing the windows
-vim.keymap.set('n', '<leader><', '<C-w><', { desc = 'Decrease current window width' })
-vim.keymap.set('n', '<leader>>', '<C-w>>', { desc = 'Increase curernt window width' })
-vim.keymap.set('n', '<leader>-', '<C-w>-', { desc = 'Decrease current window height' })
-vim.keymap.set('n', '<leader>+', '<C-w>+', { desc = 'Increase curernt window height' })
-vim.keymap.set('n', '<leader>w=', '<C-w>=', { desc = 'Make windows equally high and wide' })
+vim.keymap.set('n', '<A-<>', '<C-w>3<', { desc = 'Decrease current window width' })
+vim.keymap.set('n', '<A->>', '<C-w>3>', { desc = 'Increase curernt window width' })
+vim.keymap.set('n', '<A-S>', '<C-w>-', { desc = 'Decrease current window height' })
+vim.keymap.set('n', '<A-T>', '<C-w>+', { desc = 'Increase curernt window height' })
+vim.keymap.set('n', '<A-=>', '<C-w>=', { desc = 'Make windows equally high and wide' })
 
 -- Moving the windows
 vim.keymap.set('n', '<leader>wj', '<C-w>J', { desc = 'Move the window down' })

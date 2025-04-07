@@ -12,101 +12,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
-  --
+  { import = 'djllesh.plugins' },
 
-  -- Alternatively, use `config = function() ... end` for full control over the configuration.
-  -- If you prefer to call `setup` explicitly, use:
-  --    {
-  --        'lewis6991/gitsigns.nvim',
-  --        config = function()
-  --            require('gitsigns').setup({
-  --                -- Your gitsigns configuration here
-  --            })
-  --        end,
-  --    }
-  --
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`.
-  --
-
-  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
-  --
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `opts` key (recommended), the configuration runs
-  -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
-
-  -- { -- Autoformat
-  --   'stevearc/conform.nvim',
-  --   event = { 'BufWritePre' },
-  --   cmd = { 'ConformInfo' },
-  --   keys = {
-  --     {
-  --       '<leader>f',
-  --       function()
-  --         require('conform').format { async = true, lsp_format = 'fallback' }
-  --       end,
-  --       mode = '',
-  --       desc = '[F]ormat buffer',
-  --     },
-  --   },
-  --   opts = {
-  --     notify_on_error = false,
-  --     format_on_save = function(bufnr)
-  --       -- Disable "format_on_save lsp_fallback" for languages that don't
-  --       -- have a well standardized coding style. You can add additional
-  --       -- languages here or re-enable it for the disabled ones.
-  --       local disable_filetypes = { c = true, cpp = true }
-  --       if disable_filetypes[vim.bo[bufnr].filetype] then
-  --         return nil
-  --       else
-  --         return {
-  --           timeout_ms = 500,
-  --           lsp_format = 'fallback',
-  --         }
-  --       end
-  --     end,
-  --     formatters_by_ft = {
-  --       lua = { 'stylua' },
-  --       -- Conform can also run multiple formatters sequentially
-  --       -- python = { "isort", "black" },
-  --       --
-  --       -- You can use 'stop_after_first' to run the first available formatter from the list
-  --       -- javascript = { "prettierd", "prettier", stop_after_first = true },
-  --     },
-  --   },
-  -- },
-
-  -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
-
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
   require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  { import = 'djllesh.plugins' },
-  --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`

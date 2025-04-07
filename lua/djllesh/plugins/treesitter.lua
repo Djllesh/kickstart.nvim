@@ -4,7 +4,7 @@ return { -- Highlight, edit, and navigate code
     require('nvim-treesitter.install').compilers = { 'clang' }
   end,
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+  -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
@@ -21,6 +21,20 @@ return { -- Highlight, edit, and navigate code
       'vimdoc',
       'python',
       'cpp',
+    },
+
+    highlight = {
+      enable = true,
+    },
+
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = '<C-n>', -- set to `false` to disable one of the mappings
+        node_incremental = '<C-n>',
+        node_decremental = '<C-m>',
+        scope_incremental = '<C-c>',
+      },
     },
   },
   -- There are additional nvim-treesitter modules that you can use to interact
