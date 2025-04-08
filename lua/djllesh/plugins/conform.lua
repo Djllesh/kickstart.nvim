@@ -42,6 +42,10 @@ return { -- Autoformat
 
     formatters = {
 
+      ruff_format = {
+        append_args = { '--line-length=80' },
+      },
+
       shfmt = {
         prepend_args = { '-i', '4' },
       },

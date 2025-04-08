@@ -9,7 +9,6 @@ return { -- Highlight, edit, and navigate code
         'bash',
         'c',
         'diff',
-        'html',
         'lua',
         'luadoc',
         'markdown',
@@ -19,7 +18,12 @@ return { -- Highlight, edit, and navigate code
         'vimdoc',
         'python',
         'cpp',
+        'html',
+        'javascript',
+        'css',
       },
+
+      auto_install = true,
 
       highlight = {
         enable = true,

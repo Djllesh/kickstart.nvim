@@ -269,6 +269,8 @@ return {
         ltex = {
           filetypes = { 'tex' },
         },
+
+        html = {},
       }
 
       -- Ensure the servers and tools above are installed
