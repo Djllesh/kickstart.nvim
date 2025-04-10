@@ -228,7 +228,7 @@ return {
 
         clangd = {
           cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
-          filetypes = { '.cpp', '.h' },
+          filetypes = { 'cpp' },
           init_options = {
             fallbackFlags = { '-std=c++23' },
           },
@@ -291,7 +291,6 @@ return {
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,

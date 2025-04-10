@@ -27,6 +27,7 @@ return { -- Highlight, edit, and navigate code
 
       highlight = {
         enable = true,
+        disable = { 'latex' },
       },
 
       incremental_selection = {

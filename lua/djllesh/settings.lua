@@ -75,7 +75,7 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
-vim.g.python3_host_prog = 'C:/Users/prikh/AppData/Local/Programs/Python/Python311/python.exe'
+vim.g.python3_host_prog = vim.fn.expand '$HOME' .. '/AppData/Local/Programs/Python/Python312/python.exe'
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
