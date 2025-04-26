@@ -73,3 +73,8 @@ vim.keymap.set('n', '<leader>wl', '<C-w>L', { desc = 'Move the window right' })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- simple anonymous function toggle
+vim.keymap.set('n', '<C-s>', function()
+  vim.o.conceallevel = (vim.o.conceallevel == 0) and 2 or 0
+end, { desc = 'Toggle conceallevel', silent = true })
