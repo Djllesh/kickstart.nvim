@@ -101,6 +101,18 @@ return {
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
+
+      window = {
+        completion = {
+          border = 'rounded',
+          winhighlight = 'Normal:CmpNormal',
+        },
+        documentation = {
+          border = 'rounded',
+          winhighlight = 'Normal:CmpNormal',
+        },
+      },
+
       sources = {
         {
           name = 'lazydev',
