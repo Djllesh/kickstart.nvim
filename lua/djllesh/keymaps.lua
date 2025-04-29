@@ -45,8 +45,17 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next with centered position' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous with centered postition' })
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Copy without losing the buffer' })
 
-vim.keymap.set('n', 'o', 'o<Esc>0"_D', { desc = 'Create the line under, no insert mode' })
-vim.keymap.set('n', 'O', 'O<Esc>0"_D', { desc = 'Create the line above, no insert mode' })
+vim.keymap.set('n', 'o', '<cmd>put=""<CR>', { desc = 'Create the line under, no insert mode' })
+vim.keymap.set(
+  'n',
+  'O',
+  function()
+    local line = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())[1] - 1
+    vim.cmd(line .. 'put=""')
+  end,
+  -- 'O<Esc>0"_D'
+  { desc = 'Create the line above, no insert mode' }
+)
 
 -- Navigation within windows
 vim.keymap.set('n', '<leader>we', '<C-w>w', { desc = 'Go to opposite window' })
@@ -68,7 +77,7 @@ vim.keymap.set('n', '<leader>wk', '<C-w>K', { desc = 'Move the window up' })
 vim.keymap.set('n', '<leader>wh', '<C-w>H', { desc = 'Move the window left' })
 vim.keymap.set('n', '<leader>wl', '<C-w>L', { desc = 'Move the window right' })
 
--- NOTE: Some terminals have coliding keymaps or are not able to send distinct keycodes
+-- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })

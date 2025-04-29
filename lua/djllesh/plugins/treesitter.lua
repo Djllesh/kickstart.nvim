@@ -33,7 +33,7 @@ return { -- Highlight, edit, and navigate code
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<C-n>', -- set to `false` to disable one of the mappings
+          init_selection = '<C-n>',
           node_incremental = '<C-n>',
           node_decremental = '<C-m>',
           scope_incremental = '<C-c>',
