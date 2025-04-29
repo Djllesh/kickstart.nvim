@@ -32,6 +32,16 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us', 'en_ca' }
+
+-- NOTE: From the docs:
+-- An English word list was added to this github issue:
+-- https://github.com/vim/vim/issues/629#issuecomment-443293282
+-- Unpack thesaurus_pkg.zip, put the thesaurus.txt file somewhere, e.g.
+-- ~/.vim/thesaurus/english.txt, and the 'thesaurus' option to this file name.
+vim.opt.thesaurus = vim.fn.expand '$HOME' .. '/AppData/Local/nvim/thesaurus/thesaurus.txt'
+
 -- Enable break indent
 vim.opt.breakindent = true
 

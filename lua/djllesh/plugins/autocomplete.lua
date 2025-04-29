@@ -34,6 +34,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lsp-signature-help',
+    'f3fora/cmp-spell',
   },
   config = function()
     -- See `:help cmp`
@@ -124,6 +125,17 @@ return {
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'vimtex' },
+
+        {
+          name = 'spell',
+          keyword_length = 2,
+          option = {
+            keep_all_entries = false,
+            enable_in_context = function()
+              return vim.wo.spell
+            end,
+          },
+        },
       },
     }
   end,

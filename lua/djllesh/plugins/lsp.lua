@@ -267,7 +267,7 @@ return {
         },
 
         ltex = {
-          filetypes = { 'tex' },
+          filetypes = { 'tex', 'text' },
         },
 
         html = {},
