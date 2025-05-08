@@ -15,9 +15,9 @@ return {
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
-        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-          return
-        end
+        -- if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+        --   return
+        -- end
         return 'make install_jsregexp'
       end)(),
       dependencies = {
@@ -120,7 +120,16 @@ return {
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
-        { name = 'nvim_lsp' },
+        {
+          name = 'nvim_lsp',
+
+          -- NOTE: Taken from the help page to remove the text fields from the nvim_lsp
+
+          ---@diagnostic disable-next-line: unused-local
+          entry_filter = function(entry, ctx)
+            return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+          end,
+        },
         { name = 'luasnip' },
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
@@ -129,10 +138,11 @@ return {
         {
           name = 'spell',
           keyword_length = 2,
+          max_item_count = 8,
           option = {
             keep_all_entries = false,
             enable_in_context = function()
-              return vim.wo.spell
+              return vim.wo.spell and (vim.o.filetype == 'text' or vim.o.filetype == 'tex')
             end,
           },
         },

@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Source the file' })
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR><cmd>lua print("Sourced the file")<CR>', { desc = 'Source the file' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -35,6 +35,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<', '<gv', { desc = 'Indend to the left without leaving the visual mode' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indend to the right without leaving the visual mode' })
 
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
@@ -45,17 +46,8 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next with centered position' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous with centered postition' })
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Copy without losing the buffer' })
 
-vim.keymap.set('n', 'o', '<cmd>put=""<CR>', { desc = 'Create the line under, no insert mode' })
-vim.keymap.set(
-  'n',
-  'O',
-  function()
-    local line = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())[1] - 1
-    vim.cmd(line .. 'put=""')
-  end,
-  -- 'O<Esc>0"_D'
-  { desc = 'Create the line above, no insert mode' }
-)
+-- vim.keymap.set('n', 'o', 'o<esc>', { desc = 'Create the line under, no insert mode' })
+-- vim.keymap.set('n', 'O', 'O<esc>', { desc = 'Create the line above, no insert mode' })
 
 -- Navigation within windows
 vim.keymap.set('n', '<leader>we', '<C-w>w', { desc = 'Go to opposite window' })

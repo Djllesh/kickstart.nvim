@@ -65,6 +65,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.o.tabstop = 4
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
@@ -100,3 +101,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- HACK:In order for the Undotree to work, curl the diff.exe into the bin directory
+-- curl -LO https://github.com/neovim/deps/raw/21c5e8bdda33521a6ed497b315e03265a2785cbc/opt/diff.exe
+if vim.fn.has 'win32' == 1 then -- only windows
+  vim.g.undotree_DiffCommand = vim.fs.joinpath(vim.fn.expand '$HOME', '/AppData/Local', 'nvim/lua/bin/diff.exe')
+end

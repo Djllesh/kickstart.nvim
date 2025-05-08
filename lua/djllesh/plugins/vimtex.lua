@@ -32,6 +32,7 @@ return {
     vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
     vim.g.vimtex_syntax_conceal_cites = { type = 'icon', icon = '📑' }
     vim.opt.concealcursor = 'nc'
+    vim.g.vimtex_quickfix_open_on_warning = 0
     -- vim.opt.conceallevel = 2
   end,
 }

@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'vsassist',
+  group = vim.api.nvim_create_augroup('SnacksColoring', { clear = true }),
   callback = function()
     vim.api.nvim_set_hl(0, 'SnacksPickerMatch', { fg = '#fa6002', bg = 'NONE' })
     vim.api.nvim_set_hl(0, 'SnacksDashboardNormal', { fg = '#f15d02', bg = 'NONE' })
@@ -261,14 +262,14 @@ return {
     {
       '<leader>sd',
       function()
-        Snacks.picker.diagnostics()
+        Snacks.picker.diagnostics { layout = 'ivy_split' }
       end,
       desc = 'Diagnostics',
     },
     {
       '<leader>sD',
       function()
-        Snacks.picker.diagnostics_buffer()
+        Snacks.picker.diagnostics_buffer { layout = 'ivy_split' }
       end,
       desc = 'Buffer Diagnostics',
     },

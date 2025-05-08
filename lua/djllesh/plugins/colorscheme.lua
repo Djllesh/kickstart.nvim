@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd('ColorScheme', {
   pattern = 'vsassist',
+  group = vim.api.nvim_create_augroup('VsassistHighlight', { clear = true }),
   callback = function()
     vim.cmd 'hi! link NormalFloat Normal'
     vim.cmd 'hi! link FloatBorder NormalFloat'

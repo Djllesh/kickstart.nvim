@@ -7,7 +7,7 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        tex = { 'vale' },
+        -- tex = { 'vale' },
         text = { 'vale' },
         -- python = { 'mypy' },
         -- json = { 'jsonlint' },
