@@ -29,9 +29,11 @@ External Requirements:
   - if you have it set `vim.g.have_nerd_font` in `init.lua` to true
 - Emoji fonts (Ubuntu only, and only if you want emoji!) `sudo apt install fonts-noto-color-emoji`
 - Language Setup:
+  - If you want to write LaTeX, you need to run `npm install -g tree-sitter-cli`
   - If you want to write Typescript, you need `npm`
   - If you want to write Golang, you will need `go`
   - etc.
+
 
 > [!NOTE]
 > See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
