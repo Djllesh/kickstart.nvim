@@ -28,7 +28,7 @@ return {
 
     vim.g.vimtex_subfile_start_local = 1
     vim.g.vimtex_view_method = 'general'
-    vim.g.vimtex_view_general_viewer = 'SumatraPDF.exe'
+    vim.g.vimtex_view_general_viewer = 'SumatraPDF'
     vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
     vim.g.vimtex_syntax_conceal_cites = { type = 'icon', icon = '📑' }
     vim.opt.concealcursor = 'nc'

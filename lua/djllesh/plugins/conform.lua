@@ -55,7 +55,7 @@ return { -- Autoformat
       -- Use ["<name>"] syntax for keys with hyphens or other special chars
       ['clang-format'] = {
         -- Prepend arguments before the filename conform passes
-        prepend_args = { '-style={BasedOnStyle: mozilla, IndentWidth: 4}' },
+        prepend_args = { '-style={BasedOnStyle: microsoft, IndentWidth: 4}' },
       },
     },
   },
