@@ -22,7 +22,7 @@ return {
         preset = 'ivy',
         cycle = false,
       },
-      debug = { scores = true },
+      -- debug = { scores = true },
       matcher = {
         frecency = true,
       },
@@ -262,14 +262,24 @@ return {
     {
       '<leader>sd',
       function()
-        Snacks.picker.diagnostics { layout = 'ivy_split' }
+        Snacks.picker.diagnostics {
+          layout = 'ivy_split',
+          on_show = function()
+            vim.cmd.stopinsert()
+          end,
+        }
       end,
       desc = 'Diagnostics',
     },
     {
       '<leader>sD',
       function()
-        Snacks.picker.diagnostics_buffer { layout = 'ivy_split' }
+        Snacks.picker.diagnostics_buffer {
+          layout = 'ivy_split',
+          on_show = function()
+            vim.cmd.stopinsert()
+          end,
+        }
       end,
       desc = 'Buffer Diagnostics',
     },

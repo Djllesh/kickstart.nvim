@@ -37,7 +37,7 @@ return { -- Autoformat
       yaml = { 'prettier' },
       markdown = { 'prettier' },
       css = { 'prettier' },
-      tex = { 'tex-fmt' },
+      tex = { 'latexindent' },
     },
 
     formatters = {

@@ -3,17 +3,17 @@ return {
   lazy = false, -- we don't want to lazy load VimTeX
   -- tag = "v2.15", -- uncomment to pin to a specific release
   init = function()
-    -- 1) Compiler: use latexmk -pdf + synctex + nonstopmode + -pvc
     -- vim.g.vimtex_compiler_latexmk = {
     --   out_dir = '',
-    --   callback = 1,
+    --   callback = 0,
     --   continuous = 1,
     --   executable = 'latexmk',
     --   options = {
     --     '-pdflatex=lualatex',
-    --     -- '-pdf',
+    --     '-pdf',
     --     '-synctex=1',
     --     '-interaction=nonstopmode',
+    --     '-silent',
     --   },
     -- }
 
@@ -26,7 +26,6 @@ return {
     --    force‑reload the viewer
     vim.g.vimtex_view_automatic = 1
 
-    vim.g.vimtex_subfile_start_local = 1
     vim.g.vimtex_view_method = 'general'
     vim.g.vimtex_view_general_viewer = 'SumatraPDF.exe'
     vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
