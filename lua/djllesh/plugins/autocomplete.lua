@@ -134,7 +134,6 @@ return {
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'vimtex' },
-
         {
           name = 'spell',
           keyword_length = 2,

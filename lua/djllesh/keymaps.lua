@@ -79,3 +79,8 @@ vim.keymap.set('n', '<leader>wl', '<C-w>L', { desc = 'Move the window right' })
 vim.keymap.set('n', '<C-s>', function()
   vim.o.conceallevel = (vim.o.conceallevel == 0) and 2 or 0
 end, { desc = 'Toggle conceallevel', silent = true })
+
+-- Toggle context
+vim.keymap.set('n', '<leader>tc', '<cmd>TSContextToggle<cr>', { desc = '[T]oggle [C]context' })
+-- Oil
+vim.keymap.set('n', '\\', '<cmd>Oil<cr>', { desc = 'Open file explorer' })
