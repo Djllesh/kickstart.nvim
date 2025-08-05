@@ -38,6 +38,7 @@ return { -- Autoformat
       markdown = { 'prettier' },
       css = { 'prettier' },
       tex = { 'latexindent' },
+      asm = { 'asmfmt' },
     },
 
     formatters = {

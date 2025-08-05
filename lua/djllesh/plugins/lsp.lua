@@ -271,6 +271,9 @@ return {
         },
 
         html = {},
+        asm_lsp = {
+          filetypes = { 's', 'S', 'asm' },
+        },
       }
 
       -- Ensure the servers and tools above are installed
