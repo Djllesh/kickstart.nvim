@@ -274,6 +274,10 @@ return {
         asm_lsp = {
           filetypes = { 's', 'S', 'asm' },
         },
+        julials = {
+          filetypes = { 'julia' },
+          single_file_support = true,
+        },
       }
 
       -- Ensure the servers and tools above are installed
