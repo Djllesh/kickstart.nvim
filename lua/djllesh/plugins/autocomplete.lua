@@ -1,26 +1,25 @@
-return {
-  'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
-
-  -- These two lines ensure that the snippets from the friendly snippets
-  -- get installed and soueced correctly
-  lazy = false,
-  priority = 100,
-
+return { -- Autocompletion
+  'saghen/blink.cmp',
+  event = 'VimEnter',
+  version = '1.*',
   dependencies = {
-    -- Snippet Engine & its associated nvim-cmp source
+    -- Snippet Engine
     {
       'L3MON4D3/LuaSnip',
+      version = '2.*',
       build = (function()
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
         -- Remove the below condition to re-enable on windows.
-        -- if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-        --   return
-        -- end
+        if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+          return
+        end
         return 'make install_jsregexp'
       end)(),
       dependencies = {
+        -- `friendly-snippets` contains a variety of premade snippets.
+        --    See the README about individual language/framework/plugin snippets:
+        --    https://github.com/rafamadriz/friendly-snippets
         {
           'rafamadriz/friendly-snippets',
           config = function()
@@ -28,124 +27,114 @@ return {
           end,
         },
       },
+      opts = {},
+    },
+    'folke/lazydev.nvim',
+    'ribru17/blink-cmp-spell',
+  },
+  --- @module 'blink.cmp'
+  --- @type blink.cmp.Config
+  opts = {
+    keymap = {
+
+      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<C-e>'] = { 'hide' },
+      ['<CR>'] = { 'accept', 'fallback' },
+
+      ['<Up>'] = { 'select_prev', 'fallback' },
+      ['<Down>'] = { 'select_next', 'fallback' },
+      ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+      ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+
+      ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+      ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+
+      ['<C-l>'] = { 'snippet_forward', 'fallback' },
+      ['<C-h>'] = { 'snippet_backward', 'fallback' },
+
+      ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
+      -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+      --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },
 
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'f3fora/cmp-spell',
-  },
-  config = function()
-    -- See `:help cmp`
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    luasnip.config.setup {}
+    appearance = {
+      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- Adjusts spacing to ensure icons are aligned
+      nerd_font_variant = 'mono',
+    },
 
-    cmp.setup {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      completion = { completeopt = 'menu,menuone,noinsert' },
+    completion = {
+      -- By default, you may press `<c-space>` to show the documentation.
+      -- Optionally, set `auto_show = true` to show the documentation after a delay.
+      documentation = { auto_show = true },
+    },
 
-      -- For an understanding of why these mappings were
-      -- chosen, you will need to read `:help ins-completion`
-      --
-      -- No, but seriously. Please read `:help ins-completion`, it is really good!
-      mapping = cmp.mapping.preset.insert {
-        -- Select the [n]ext item
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Select the [p]revious item
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-
-        -- Scroll the documentation window [b]ack / [f]orward
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-        -- Accept ([y]es) the completion.
-        --  This will auto-import if your LSP supports it.
-        --  This will expand snippets if the LSP sent a snippet.
-        ['<CR>'] = cmp.mapping.confirm { select = true },
-
-        -- If you prefer more traditional completion keymaps,
-        -- you can uncomment the following lines
-        --['<CR>'] = cmp.mapping.confirm { select = true },
-        --['<Tab>'] = cmp.mapping.select_next_item(),
-        --['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-        -- Manually trigger a completion from nvim-cmp.
-        --  Generally you don't need this, because nvim-cmp will display
-        --  completions whenever it has completion options available.
-        ['<C-Space>'] = cmp.mapping.complete {},
-
-        -- Think of <c-l> as moving to the right of your snippet expansion.
-        --  So if you have a snippet that's like:
-        --  function $name($args)
-        --    $body
-        --  end
-        --
-        -- <c-l> will move you to the right of each of the expansion locations.
-        -- <c-h> is similar, except moving you backwards.
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { 'i', 's' }),
-
-        -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-        --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-      },
-
-      window = {
-        completion = {
-          border = 'rounded',
-          winhighlight = 'Normal:CmpNormal',
-        },
-        documentation = {
-          border = 'rounded',
-          winhighlight = 'Normal:CmpNormal',
-        },
-      },
-
-      sources = {
-        {
-          name = 'lazydev',
-          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-          group_index = 0,
-        },
-        {
-          name = 'nvim_lsp',
-
-          -- NOTE: Taken from the help page to remove the text fields from the nvim_lsp
-
-          ---@diagnostic disable-next-line: unused-local
-          entry_filter = function(entry, ctx)
-            return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
-          end,
-        },
-        { name = 'luasnip' },
-        { name = 'path' },
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'vimtex' },
-        {
-          name = 'spell',
-          keyword_length = 2,
-          max_item_count = 8,
-          option = {
-            keep_all_entries = false,
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'lazydev', 'spell' },
+      per_filetype = { { tex = 'vimtex' } },
+      providers = {
+        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        spell = {
+          name = 'Spell',
+          module = 'blink-cmp-spell',
+          opts = {
+            -- EXAMPLE: Only enable source in `@spell` captures, and disable it
+            -- in `@nospell` captures.
             enable_in_context = function()
-              return vim.wo.spell and (vim.o.filetype == 'text' or vim.o.filetype == 'tex')
+              if vim.bo.filetype == 'tex' then
+                local in_math = (vim.fn['vimtex#syntax#in_mathzone']() == 1)
+                local in_comment = (vim.fn['vimtex#syntax#in_comment']() == 1)
+
+                -- crude command detection: immediately after a backslash or inside a command name
+                local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+                local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1] or ''
+                local before = line:sub(1, col)
+                local after_bs = before:match '\\%a*$' ~= nil
+                return not in_math and not in_comment and not after_bs
+              end
+              local curpos = vim.api.nvim_win_get_cursor(0)
+              local captures = vim.treesitter.get_captures_at_pos(0, curpos[1] - 1, curpos[2] - 1)
+              local in_spell_capture = false
+              for _, cap in ipairs(captures) do
+                if cap.capture == 'spell' then
+                  in_spell_capture = true
+                elseif cap.capture == 'nospell' then
+                  return false
+                end
+              end
+              return in_spell_capture
             end,
           },
         },
       },
-    }
-  end,
+    },
+
+    snippets = { preset = 'luasnip' },
+
+    -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
+    -- which automatically downloads a prebuilt binary when enabled.
+    --
+    -- By default, we use the Lua implementation instead, but you may enable
+    -- the rust implementation via `'prefer_rust_with_warning'`
+    --
+    -- See :h blink-cmp-config-fuzzy for more information
+    fuzzy = {
+      implementation = 'prefer_rust_with_warning',
+      sorts = {
+        function(a, b)
+          local sort = require 'blink.cmp.fuzzy.sort'
+          if a.source_id == 'spell' and b.source_id == 'spell' then
+            return sort.label(a, b)
+          end
+        end,
+        -- This is the normal default order, which we fall back to
+        'score',
+        'kind',
+        'label',
+      },
+    },
+
+    -- Shows a signature help window while you type arguments for a function
+    signature = { enabled = true },
+  },
 }
