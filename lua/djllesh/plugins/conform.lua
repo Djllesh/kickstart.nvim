@@ -18,7 +18,7 @@ return { -- Autoformat
 
     format_on_save = function(bufnr)
       return {
-        timeout_ms = 3000,
+        timeout_ms = 10000,
         lsp_format = 'fallback',
       }
       -- local disable_filetypes = { c = true, cpp = true }
