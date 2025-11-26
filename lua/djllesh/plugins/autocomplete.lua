@@ -36,8 +36,11 @@ return { -- Autocompletion
   --- @type blink.cmp.Config
   opts = {
     keymap = {
-
-      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      -- ['<C-space>'] = {
+      --   function(cmp)
+      --     cmp.show { providers = { 'snippets' } }
+      --   end,
+      -- },
       ['<C-e>'] = { 'hide' },
       ['<CR>'] = { 'accept', 'fallback' },
 
@@ -53,8 +56,6 @@ return { -- Autocompletion
       ['<C-h>'] = { 'snippet_backward', 'fallback' },
 
       ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
-      -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-      --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
     },
 
     appearance = {
@@ -64,8 +65,6 @@ return { -- Autocompletion
     },
 
     completion = {
-      -- By default, you may press `<c-space>` to show the documentation.
-      -- Optionally, set `auto_show = true` to show the documentation after a delay.
       documentation = { auto_show = true },
     },
 

@@ -1,4 +1,3 @@
-vim.opt.shell = 'pwsh'
 -- Terminal settings
 local job_id = 0
 local filename = ''

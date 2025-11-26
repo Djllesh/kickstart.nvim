@@ -267,7 +267,11 @@ return {
         },
 
         ltex = {
-          filetypes = { 'tex', 'text', 'markdown' },
+          filetypes = {
+            'tex',
+            'text',
+            -- 'markdown'
+          },
         },
 
         html = {},

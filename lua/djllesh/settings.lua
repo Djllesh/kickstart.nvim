@@ -72,6 +72,16 @@ vim.o.tabstop = 4
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- NOTE: This setup is an amalgamation of the help page and AI. Try running
+-- `!!ls`
+vim.opt.shell = 'pwsh'
+vim.opt.shellcmdflag =
+  [[-NoLogo -NonInteractive -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='Plaintext';]]
+vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+vim.opt.shellquote = ''
+vim.opt.shellxquote = ''
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
